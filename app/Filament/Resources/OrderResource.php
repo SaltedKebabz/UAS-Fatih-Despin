@@ -23,11 +23,6 @@ class OrderResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('order_number')
-                    ->label('Order Number')
-                    ->required()
-                    ->maxLength(20),
-
                 Forms\Components\Select::make('customer_id')
                     ->label('Customer')
                     ->options(Customer::all()->pluck('name', 'id'))
@@ -49,11 +44,6 @@ class OrderResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('order_number')
-                    ->label('Order Number')
-                    ->sortable()
-                    ->searchable(),
-
                 Tables\Columns\TextColumn::make('customer.name')
                     ->label('Customer')
                     ->sortable()

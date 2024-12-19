@@ -1,29 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@yield('title', 'Pengisian Air Galon')</title>
-    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-    <script src="{{ asset('js/app.js') }}" defer></script>
-</head>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <header>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/order">Order</a></li>
-                <li><a href="/about">About</a></li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        @yield('content')
-    </main>
-    <footer>
-        <p>&copy; {{ date('Y') }} Pengisian Air Galon</p>
+    @include('layouts.header')
+<body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
+    @yield('content')
+    <footer class="footer py-3">
+        <div class="container">
+            <p class="small mb-0 text-light">
+                &copy; <script>document.write(new Date().getFullYear())</script> Created With <i class="ti-heart text-danger"></i> By <a href="http://devcrud.com" target="_blank"><span class="text-danger" title="Bootstrap 4 Themes and Dashboards">DevCRUD</span></a> 
+            </p>
+        </div>
     </footer>
+    @include('layouts.footer')
 </body>
 </html>
