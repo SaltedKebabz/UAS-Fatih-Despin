@@ -39,7 +39,7 @@
                 <ul class="navbar-nav brand">
                     <img src="assets/imgs/avatar.jpg" alt="" class="brand-img">
                     <li class="brand-txt">
-                        <h5 class="brand-title">John Doe</h5>
+                        <h5 class="brand-title">J{{ $profile->name }}</h5>
                         <div class="brand-subtitle">Web Designer | Developer</div>
                     </li>
                 </ul>
