@@ -13,9 +13,8 @@
             </ul>  
             <div class="header-content">
                 <h4 class="header-subtitle" >Hello, I am</h4>
-                <h1 class="header-title">Aplikasi Galon</h1>
-                <h6 class="header-mono" >Frond end Designer | Developer</h6>
-                <button class="btn btn-primary btn-rounded"><i class="ti-printer pr-2"></i>Print Resume</button>
+                <h1 class="header-title">UAS</h1>
+                
             </div>
         </div>
     </header>
