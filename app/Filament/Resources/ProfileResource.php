@@ -3,31 +3,26 @@
 namespace App\Filament\Resources;
 
 use Filament\Forms;
-use App\Models\User;
 use Filament\Tables;
 use App\Models\Profile;
 use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\Textarea;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\ViewAction;
+use Filament\Tables\Columns\TextColumn;
+use Illuminate\Support\Facades\Storage;
 use Filament\Forms\Components\TextInput;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Forms\Components\FileUpload;
+use Filament\Tables\Filters\SelectFilter;
 use Illuminate\Database\Eloquent\Builder;
-use Filament\Tables\Actions\BulkActionGroup;
-use Filament\Tables\Actions\DeleteBulkAction;
 use App\Filament\Resources\ProfileResource\Pages;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use App\Filament\Resources\ProfileResource\RelationManagers;
-use App\Filament\Resources\ProfileResource\Pages\EditProfile;
-use App\Filament\Resources\ProfileResource\Pages\ViewProfile;
-use App\Filament\Resources\ProfileResource\Pages\ListProfiles;
-use App\Filament\Resources\ProfileResource\Pages\CreateProfile;
 
 class ProfileResource extends Resource
 {
-    protected static ?string $model = User::class;
+    protected static ?string $model = Profile::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -35,54 +30,70 @@ class ProfileResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')
-                    ->label('Nama')
-                    ->required()
-                    ->maxLength(100),
+                TextInput::make('nim')
+                ->label('NIM')
+                ->maxLength(10)
+                ->required(),
 
-                Forms\Components\TextInput::make('email')
-                    ->label('Email')
-                    ->email()
-                    ->required()
-                    ->maxLength(15),
+                TextInput::make('nama')
+                ->label('Nama Mahasiswa')
+                ->maxLength(100)
+                ->required(),
 
-                    Textarea::make('biografi')
-                    ->label('Biografi')
-                    ->required()
-                    ->maxLength(400),
+                TextInput::make('kelas')
+                ->label('Kelas')
+                ->maxLength(100)
+                ->required(),
 
-                    Textarea::make('alamat')
-                    ->label('Alamat')
-                    ->required()
-                    ->maxLength(100),
+                FileUpload::make('foto_profil')
+                ->label('Foto Profil')
+                ->image()
+                ->maxSize(3072)
+                ->imageEditor()
+                ->directory("profil")
+                ->before(function (Profile $profil) {
+                    if ($profil->foto_profil) {
+                        Storage::disk('public')->delete($profil->foto_profil);
+                    }
+                }),
 
-                    TextInput::make('no_telpon')
-                    ->label('No Telpon')
-                    ->tel()
-                    ->telRegex('/^[+]*[(]{0,1}[0-9]{1,4}[)]{0,1}[-\s\.\/0-9]*$/'),
-
-                    FileUpload::make('ProfilePic')
-                    ->image(),
-                    
-                    TextInput::make('password')
-                    ->label('Password')
-                    ->password()
-                    ->revealable()
-                    ->required(),
+                Textarea::make('Biodata')
+            ->label('Biodata')
+                ->autosize()
+                ->minLength(2)
+                ->maxLength(2048),
             ]);
     }
+
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                //
+                TextColumn::make('nim')
+                ->label('NIM'),
+
+                TextColumn::make('email')
+                ->label('Email'),
+
+                TextColumn::make('nama')
+                ->searchable(),
+
+                TextColumn::make('kelas'),
+
+                ImageColumn::make('foto_profil'),
+
+                TextColumn::make('alamat')
+                ->default("none"),
+
+                TextColumn::make('Biodata')
+                ->default("none"),
             ])
             ->filters([
-                //
+                SelectFilter::make('nama')
+                ->label('Nama'),
             ])
             ->actions([
-                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([

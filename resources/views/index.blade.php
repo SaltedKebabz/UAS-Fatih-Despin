@@ -12,8 +12,8 @@
                 <li class="social-item"><a class="social-link text-light" href="#"><i class="ti-github" aria-hidden="true"></i></a></li>
             </ul>  
             <div class="header-content">
-                <h4 class="header-subtitle" >Hello, I am</h4>
-                <h1 class="header-title">UAS</h1>
+                <h4 class="header-subtitle" >UAS
+                <h1 class="header-title">Pemograman Web</h1>
                 
             </div>
         </div>
@@ -28,7 +28,7 @@
                     <li class="nav-item">
                         <a href="#home" class="nav-link">Home</a>
                     </li>
-                    @foreach ($users as $user)
+                    @foreach ($Profile as $Profile)
                     <li class="nav-item">
                         <a href="{{ route('profile.show', $user->name ) }}" class="nav-link">{{ $user->name }}</a>
                     </li>
