@@ -13,10 +13,14 @@ return new class extends Migration
     {
         Schema::create('Profile', function (Blueprint $table) {
             $table->id();
-            $table->string('Nama');
-            $table->text('Kelas');
-            $table->text('NIM');
+            $table->string('nama');
+            $table->text('kelas');
+            $table->text('nim');
+            $table->text('biografi')->nullable();
+            $table->text('alamat')->nullable();
+            $table->bigInteger('no_telpon')->nullable();
             $table->string('ProfilePic')->nullable();
+            $table->timestamps();
         });
     }
 

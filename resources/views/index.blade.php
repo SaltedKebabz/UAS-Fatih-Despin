@@ -30,7 +30,7 @@
                     </li>
                     @foreach ($Profile as $Profile)
                     <li class="nav-item">
-                        <a href="{{ route('profile.show', $user->name ) }}" class="nav-link">{{ $user->name }}</a>
+                        <a href="{{ route('profile.show', $Profile->nama ) }}" class="nav-link">{{ $Profile->nama }}</a>
                     </li>
                     @endforeach
                     <li class="nav-item">

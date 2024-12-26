@@ -37,10 +37,10 @@ class ProfileController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Profile $Profile)
+    public function show(Profile $profile)
     {
         return view('profile.index', [
-            'profile' => $Profile,
+            'profile' => $profile,
         ]);  
     }
 

@@ -30,14 +30,14 @@ class ProfileResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('nim')
-                ->label('NIM')
-                ->maxLength(10)
-                ->required(),
-
                 TextInput::make('nama')
                 ->label('Nama Mahasiswa')
                 ->maxLength(100)
+                ->required(),
+
+                TextInput::make('nim')
+                ->label('NIM')
+                ->maxLength(10)
                 ->required(),
 
                 TextInput::make('kelas')
@@ -45,20 +45,26 @@ class ProfileResource extends Resource
                 ->maxLength(100)
                 ->required(),
 
-                FileUpload::make('foto_profil')
+                FileUpload::make('ProfilePic')
                 ->label('Foto Profil')
                 ->image()
                 ->maxSize(3072)
                 ->imageEditor()
                 ->directory("profil")
                 ->before(function (Profile $profil) {
-                    if ($profil->foto_profil) {
-                        Storage::disk('public')->delete($profil->foto_profil);
+                    if ($profil->ProfilePic) {
+                        Storage::disk('public')->delete($profil->ProfilePic);
                     }
                 }),
 
-                Textarea::make('Biodata')
-            ->label('Biodata')
+                Textarea::make('biografi')
+                ->label('Biografi')
+                ->autosize()
+                ->minLength(2)
+                ->maxLength(2048),
+
+                Textarea::make('alamat')
+                ->label('Alamat')
                 ->autosize()
                 ->minLength(2)
                 ->maxLength(2048),
@@ -73,20 +79,17 @@ class ProfileResource extends Resource
                 TextColumn::make('nim')
                 ->label('NIM'),
 
-                TextColumn::make('email')
-                ->label('Email'),
-
                 TextColumn::make('nama')
                 ->searchable(),
 
                 TextColumn::make('kelas'),
 
-                ImageColumn::make('foto_profil'),
+                ImageColumn::make('ProfilePic'),
 
                 TextColumn::make('alamat')
                 ->default("none"),
 
-                TextColumn::make('Biodata')
+                TextColumn::make('biografi')
                 ->default("none"),
             ])
             ->filters([
@@ -115,7 +118,6 @@ class ProfileResource extends Resource
         return [
             'index' => Pages\ListProfiles::route('/'),
             'create' => Pages\CreateProfile::route('/create'),
-            'view' => Pages\ViewProfile::route('/{record}'),
             'edit' => Pages\EditProfile::route('/{record}/edit'),
         ];
     }

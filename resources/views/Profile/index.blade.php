@@ -1,4 +1,4 @@
-@extends('layouts.app')
+    @extends('layouts.app')
 
 @section('content')
 <a href="components.html" class="btn btn-primary btn-component" data-spy="affix" data-offset-top="600"><i class="ti-shift-left-alt"></i> Components</a>
@@ -13,7 +13,7 @@
             </ul>  
             <div class="header-content">
                 <h4 class="header-subtitle" >Hello, I am</h4>
-                <h1 class="header-title">{{ $profile->name }}</h1>
+                <h1 class="header-title">{{ $profile->nama }}</h1>
                 <button class="btn btn-primary btn-rounded"><i class="ti-printer pr-2"></i>Print Resume</button>
             </div>
         </div>
@@ -38,7 +38,7 @@
                 <ul class="navbar-nav brand">
                     <img src="{{asset('storage/'. $profile->ProfilePic)}}" alt="" class="brand-img">
                     <li class="brand-txt">
-                        <h5 class="brand-title">J{{ $profile->name }}</h5>
+                        <h5 class="brand-title">J{{ $profile->nama }}</h5>
                         <div class="brand-subtitle">Web Designer | Developer</div>
                     </li>
                 </ul>

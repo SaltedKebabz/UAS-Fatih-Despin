@@ -7,4 +7,4 @@ use App\Http\Controllers\ProfileController;
 Route::resource('products', ProductController::class);
 
 route::get('/', [ProfileController::class, 'index']);
-Route::get('/profile/{user:name}', [ProfileController::class, 'show'])->name('profile.show');
+Route::get('/profile/{profile:nama}', [ProfileController::class, 'show'])->name('profile.show');
